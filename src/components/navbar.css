@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --theme-color: #1434A4;
+  --navbar-text-color: rgb(5, 5, 5);
+}
+
+header {
+  width: 100vw;
+  height: 80px;
+}
+
+.navbar {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  width: 100vw;
+  height: 80px;
+  background-color: var(--theme-color);
+  transition: 300ms;
+}
+
+.navbar-text {
+  color: var(--navbar-text-color);
+  margin-left: 20px;
+  margin-top: 10px;
+  font-size: 3.5rem;
+}
+
+#FaBars,
+#FaTimes {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  font-size: 2.3rem;
+  border: none;
+  color: var(--navbar-text-color);
+  background-color: var(--theme-color);
+}
+
+#FaBars:hover,
+#FaTimes:hover {
+  opacity: 50%;
+  cursor: pointer;
+}
+
+#FaTimes,
+.navbar-links {
+  display: none;
+  
+}
+
+.navbar.show {
+  height: 300px;
+}
+
+.navbar-links.show {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100vw;
+  height: 220px;
+  top: 80px;
+  padding: 25px 0;
+  border-top: 2px solid black;
+  list-style: none;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: black;
+  font-size: 2rem;
+}
+
+.navbar-links a:hover {
+  color: white;
+}
