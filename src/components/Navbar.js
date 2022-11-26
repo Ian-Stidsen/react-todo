@@ -13,19 +13,14 @@ function Navbar() {
     navbar = document.getElementsByClassName('navbar')[0];
     navbarLinks = document.getElementsByClassName('navbar-links')[0];
   });
-  let navbarToggled = false;
+
   function navToggle() {
-    if (navbarToggled) navbarLinks.classList.toggle('show');
-    navbarToggled = !navbarToggled;
     navbar.classList.toggle('show');
-    navbar.addEventListener('transitionend', ()=>{
-      navbarLinks.classList.toggle('show');
-    });
-  }
+    navbarLinks.classList.toggle('show');
+  };
   return (
-    <header className="navbar-container">
+    <header>
       <nav className='navbar'>
-        <h1 className='navbar-text'>Todo List</h1>
         <button id='FaBars' onClick={navToggle}><FaBars /></button>
         <button id='FaTimes' onClick={navToggle}><FaTimes/></button>
         <ul className='navbar-links'>
