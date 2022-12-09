@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+}
+
+li {list-style-type: none;}
+
+.add-todo {
+  display: grid;
+  grid-template-areas: 
+  'add-name add-date add-btn';
+  grid-template-columns: 40% 40% 20%;
+  width: 400px;
+  height: 40px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.add-todo-name,
+.add-todo-date,
+.add-todo-btn {
+  text-align: center;
+  height: 100%;
+}
+
+.add-todo-name {grid-area: 'add-name'}
+.add-todo-date {grid-area: 'add-date'}
+.add-todo-btn {grid-area: 'add-btn'}
+
+.todo {
+  display: grid;
+  grid-template-areas: 
+  'name date edit complete';
+  grid-template-columns: 40% 20% 15% 25%;
+  width: 600px;
+  height: 40px;
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.todo-name {grid-area: 'name'}
+.todo-date {grid-area: 'date'}
+.todo-edit-btn {grid-area: 'edit'}
+.todo-complete-btn {grid-area: 'complete'}
+
+.todo-name,
+.todo-date,
+.todo-edit-btn,
+.todo-complete-btn {
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
