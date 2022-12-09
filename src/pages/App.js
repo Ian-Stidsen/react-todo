@@ -6,8 +6,6 @@ import './app.css';
 
 function App() {
 
-  function log(log) {console.log(log)};
-
   const [inputValue, setInputValue] = useState({
     id: 1,
     name: '',
