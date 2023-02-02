@@ -51,10 +51,8 @@ li {list-style-type: none;}
 .todo-edit-btn {grid-area: 'edit'}
 .todo-complete-btn {grid-area: 'complete'}
 
-.todo-name,
-.todo-date,
-.todo-edit-btn,
-.todo-complete-btn {
+.todo-name, .todo-date,
+.todo-edit-btn, .todo-complete-btn {
   text-align: center;
   height: 100%;
   width: 100%;
