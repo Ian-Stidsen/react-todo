@@ -26,9 +26,9 @@ function App() {
   ]);
 
 
-  const inputDataHandler = (e) => {
-    const elementValue = e.target.value;
-    const elementType = e.target.type;
+  const inputDataHandler = (inputElement) => {
+    const elementValue = inputElement.target.value;
+    const elementType = inputElement.target.type;
 
     switch(elementType) {
       case 'text':
@@ -50,7 +50,10 @@ function App() {
 
 
   const addTodo = () => {
-    if(inputValue.name.length === 0) return;
+    if(inputValue.name.length === 0) {
+      alert('Please enter a name');
+      return;
+    }
     setTodos([...todos, inputValue]);
 
     setInputValue({
@@ -90,6 +93,7 @@ function App() {
     const todoId = parseInt(todoElement.target.parentNode.parentNode.id);
     const todoValue = todoElement.target.value;
     const inputType = todoElement.target.type;
+
     setTodos(prevState => {
       const newState = prevState.map(todo => {
         if (todo.id!== todoId) return todo;
@@ -139,21 +143,6 @@ function App() {
             <li className='mb-2' key={todo.id} id={todo.id}>
 
               <InputGroup>
-                <Form.Control
-                  className='text-center'
-                  type='text'
-                  readOnly={!todo.edit}
-                  value={todo.name}
-                  onChange={updateTodo}
-                />
-
-                <Form.Control
-                  className='text-center'
-                  type='date'
-                  readOnly={!todo.edit}
-                  value={todo.date}
-                  onChange={updateTodo}
-                />
 
                 <Button
                   onClick={editTodo}
@@ -162,12 +151,32 @@ function App() {
                   {todo.edit? 'Done' : 'Edit'}
                 </Button>
 
+                <Form.Control
+                  className='text-center'
+                  type='text'
+                  readOnly={!todo.edit}
+                  value={todo.name}
+                  onChange={updateTodo}
+                  style={{borderColor: todo.edit? 'blue' : null}}
+                />
+
+                {todo.date !== '' || todo.edit? 
+                  <Form.Control
+                    className='text-center'
+                    type='date'
+                    readOnly={!todo.edit}
+                    value={todo.date}
+                    onChange={updateTodo}
+                    style={{borderColor: todo.edit? 'blue' : null}}
+                  />
+                : null }
+
                 <Button
                   className='button'
                   onClick={removeTodo}
                   variant='outline-danger'
                 >
-                  Done
+                  X
                 </Button>
 
               </InputGroup>
