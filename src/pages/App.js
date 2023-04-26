@@ -13,8 +13,7 @@ function App() {
     id: 1,
     name: '',
     date: '',
-    readOnly: true,
-    edit: 'Edit'
+    edit: false
   });
 
   const [todos, setTodos] = useState([
@@ -22,8 +21,7 @@ function App() {
       id: 0,
       name: 'Todo',
       date: '1111-11-11',
-      readOnly: true,
-      edit: 'Edit'
+      edit: false
     }
   ]);
 
@@ -59,8 +57,7 @@ function App() {
       id: inputValue.id + 1,
       name: '',
       date: '',
-      readOnly: true,
-      edit: 'Edit'
+      edit: false
     });
   };
 
@@ -81,9 +78,7 @@ function App() {
     setTodos(prevState => {
       const newState = prevState.map(todo => {
         if (todo.id !== todoId) return todo;
-        if (todo.edit === 'Edit') return {...todo, readOnly: false, edit: 'Done'};
-        return {...todo, readOnly: true, edit: 'Edit'};
-
+        return {...todo, edit: !todo.edit};
       });
       return newState;
 
@@ -111,6 +106,7 @@ function App() {
     <main className='justify-content-center'>
 
       <InputGroup className='mb-3 mx-auto' style={{maxWidth: '600px'}}>
+
         <Form.Control
           className='text-center'
           type='text'
@@ -118,18 +114,23 @@ function App() {
           aria-label='Todo name'
           value={inputValue.name}
           onChange={inputDataHandler}
-        ></Form.Control>
+        />
+
         <Form.Control
           className='text-center'
           type='date'
           value={inputValue.date}
           onChange={inputDataHandler}
         />
+
         <Button
           id='addTodoButton'
           onClick={addTodo}
           variant='dark'
-        >Add Todo</Button>
+        >
+          Add Todo
+        </Button>
+
       </InputGroup>
 
       <ul className='mx-auto' style={{maxWidth: '800px'}}>
@@ -141,15 +142,15 @@ function App() {
                 <Form.Control
                   className='text-center'
                   type='text'
-                  readOnly={todo.readOnly}
+                  readOnly={!todo.edit}
                   value={todo.name}
                   onChange={updateTodo}
-                  />
+                />
 
                 <Form.Control
                   className='text-center'
                   type='date'
-                  readOnly={todo.readOnly}
+                  readOnly={!todo.edit}
                   value={todo.date}
                   onChange={updateTodo}
                 />
@@ -158,7 +159,7 @@ function App() {
                   onClick={editTodo}
                   variant='outline-primary'
                 >
-                  {todo.edit}
+                  {todo.edit? 'Done' : 'Edit'}
                 </Button>
 
                 <Button
