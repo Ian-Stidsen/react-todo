@@ -2,7 +2,10 @@ import React, {
   useState
 } from 'react';
 
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import './app.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 function App() {
 
@@ -61,9 +64,8 @@ function App() {
     });
   };
 
-
-  const removeTodo = (e) => {
-    const todoId = parseInt(e.target.parentNode.id);
+  const removeTodo = (todoElement) => {
+    const todoId = parseInt(todoElement.target.parentNode.parentNode.id);
     setTodos(prevState => {
       return prevState.filter(todo => {
         return todo.id !== todoId ? todo : null
@@ -73,8 +75,8 @@ function App() {
   };
 
 
-  const editTodo = (e) => {
-    const todoId = parseInt(e.target.parentNode.id);
+  const editTodo = (todoElement) => {
+    const todoId = parseInt(todoElement.target.parentNode.parentNode.id);
 
     setTodos(prevState => {
       const newState = prevState.map(todo => {
@@ -89,10 +91,10 @@ function App() {
   };
 
 
-  const updateTodo = (e) => {
-    const todoId = parseInt(e.target.parentNode.id);
-    const todoValue = e.target.value;
-    const inputType = e.target.type;
+  const updateTodo = (todoElement) => {
+    const todoId = parseInt(todoElement.target.parentNode.parentNode.id);
+    const todoValue = todoElement.target.value;
+    const inputType = todoElement.target.type;
     setTodos(prevState => {
       const newState = prevState.map(todo => {
         if (todo.id!== todoId) return todo;
@@ -106,24 +108,74 @@ function App() {
 
 
   return (
-    <main>
-      <div className='add-todo'>
-        <input autoFocus className='add-todo-name' id='todoInput' type='text' placeholder='Add new todo' value={inputValue.name} onChange={inputDataHandler}/>
-        <input className='add-todo-date' id='todoDate' type='date' value={inputValue.date} onChange={inputDataHandler}></input>
-        <button className='add-todo-btn' id='addTodoButton' type='button' onClick={addTodo}>Add</button>
-      </div>
-      <ul className='todo-list'>
+    <main className='justify-content-center'>
+
+      <InputGroup className='mb-3 mx-auto' style={{maxWidth: '600px'}}>
+        <Form.Control
+          className='text-center'
+          type='text'
+          placeholder='Todo name'
+          aria-label='Todo name'
+          value={inputValue.name}
+          onChange={inputDataHandler}
+        ></Form.Control>
+        <Form.Control
+          className='text-center'
+          type='date'
+          value={inputValue.date}
+          onChange={inputDataHandler}
+        />
+        <Button
+          id='addTodoButton'
+          onClick={addTodo}
+          variant='dark'
+        >Add Todo</Button>
+      </InputGroup>
+
+      <ul className='mx-auto' style={{maxWidth: '800px'}}>
         {todos.map(todo => {
           return (
-            <li className='todo' key={todo.id} id={todo.id}>
-              <input className='todo-name' readOnly={todo.readOnly} type='text' value={todo.name}  onChange={updateTodo} />
-              <input className='todo-date' readOnly={todo.readOnly} type='date' value={todo.date}  onChange={updateTodo} />
-              <button className='todo-edit-btn' onClick={editTodo}>{todo.edit}</button>
-              <button className='todo-complete-btn' onClick={removeTodo}>Complete</button>
+            <li className='mb-2' key={todo.id} id={todo.id}>
+
+              <InputGroup>
+                <Form.Control
+                  className='text-center'
+                  type='text'
+                  readOnly={todo.readOnly}
+                  value={todo.name}
+                  onChange={updateTodo}
+                  />
+
+                <Form.Control
+                  className='text-center'
+                  type='date'
+                  readOnly={todo.readOnly}
+                  value={todo.date}
+                  onChange={updateTodo}
+                />
+
+                <Button
+                  onClick={editTodo}
+                  variant='outline-primary'
+                >
+                  {todo.edit}
+                </Button>
+
+                <Button
+                  className='button'
+                  onClick={removeTodo}
+                  variant='outline-danger'
+                >
+                  Done
+                </Button>
+
+              </InputGroup>
+
             </li>
           )
         })}
       </ul>
+
     </main>
   );
 }
